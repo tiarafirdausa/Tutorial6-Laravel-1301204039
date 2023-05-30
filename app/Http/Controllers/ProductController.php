@@ -38,9 +38,10 @@ class ProductController extends Controller
         $prod->name = $request->name;
         $prod->price = $request->price;
         $prod->save();
-
-        //Session::flash('msg', 'Tambah berhasil');
-
+        if(request()->segment(1) == 'api') return response()->json([
+            "error" => false,
+            "message" => 'Tambah berhasil'
+        ]);
         return redirect('/product')->with('msg', 'Tambah berhasil');
     }
 
